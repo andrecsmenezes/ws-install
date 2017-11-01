@@ -17,7 +17,9 @@
 	###########################################################################
 	#	VERIFICA AS DEPENDENCIAS BÁSICAS PARA O FUNCIONAMENTO DO SISTEMA
 	###########################################################################
-		include_once("./ws-server-verify.php");
+		if(empty($_GET)){
+			include_once("./ws-server-verify.php");
+		}
 
 	###########################################################################
 	#	FUNÇÃO PARA CÓPIA DE DIRETÓRIOS COMPLETOS 
@@ -54,6 +56,7 @@
 			}
 			closedir($dd);
 		}
+		chmod($Dir,0777);
 		rmdir($Dir);
 	}
 
@@ -62,10 +65,11 @@
 	####################################################################################
 	#	AQUI ELE DESCOMPACTA O DIRETÓRIO COM TODOS OS ARQUIVOS NA RAIZ E DÁ UM REFRESH  
 	####################################################################################
-
 	if((isset($_GET['install']) && @$_GET['install']=="install")){
 		echo '<script>console.log("install")</script>'.PHP_EOL;
-		if(file_exists("./../admin")){ ws_delete_dir("./../admin"); }
+		if(file_exists("./../admin")){ 
+			ws_delete_dir("./../admin"); 
+		}
 		verifyAdmin:
 		if(!file_exists("./../admin")){
 			$zip = new ZipArchive();
@@ -84,8 +88,10 @@
 			sleep(1);
 			goto verifyAdmin;
 		}
+		echo "ok!";
 		exit;
 	}
+
 	####################################################################################
 	#	PERGUNTA AO USUARIO SE TEM CERTEZA QUE QUER INSTALAR  
 	####################################################################################
