@@ -73,7 +73,6 @@
 				if($zip->extractTo("./../")){
 					$folderName = "CMS-".str_replace(".zip","",basename($_GET['githubFile']));
 					rename("./../".$folderName.'/admin','./../admin'); 
-					rename("./../".$folderName.'/ws-install/ws-install.php','./../ws-install.php'); 
 					ws_delete_dir("./../".$folderName);
 					$zip->close();
 					unlink("./../ws-update.zip");
@@ -94,7 +93,7 @@
 		<script>
 			window.top.$("#loader,.logo").hide();
 			window.top.$("#botao").unbind("click press tap").bind("click press tap",function(){
-				window.top.$("#iframe").attr("src","/ws-install/ws-install.php?install=install&githubFile=<?=$_GET['githubFile']?>");
+				window.top.$("#iframe").attr("src","/ws-install-master/ws-install.php?install=install&githubFile=<?=$_GET['githubFile']?>");
 				window.top.$("#botao").hide();
 				window.top.$(".comboCentral").hide();
 				window.top.$(".preloader").show();
@@ -129,7 +128,7 @@
 		$ctx = stream_context_create();
 		stream_context_set_params($ctx, array("notification" => "stream_notification_callback"));
 		file_put_contents("./../ws-update.zip",file_get_contents($_GET['githubFile'], false, $ctx));
-		echo "<script>window.location='/ws-install/ws-install.php?install=fire&githubFile=".$_GET['githubFile']."';</script>";
+		echo "<script>window.location='/ws-install-master/ws-install.php?install=fire&githubFile=".$_GET['githubFile']."';</script>";
 		exit;
 endif;
 
