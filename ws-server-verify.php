@@ -39,7 +39,14 @@
 	    return $val;
 	}
 
+	###########################################################################
+	#	VERIFICA AS DEPENDENCIAS BÁSICAS PARA O FUNCIONAMENTO DO SISTEMA
+	###########################################################################
 
+	if(basename(dirname(__FILE__))!="ws-install-master"){
+		$bug = 1;
+		$errors.=  "<div>• Para instalar/atualizar o WebSheep, é necessário colocar os arquivos do instalador dentro do diretório <b>/ws-install-master/</b>, e em seguida dê continuidade a instalação.</div> ";
+	}
 	if (version_compare(PHP_VERSION, '5.6.4') < 0) {
 		$bug = 1;
 		$errors.="<div>• A versão do PHP é ".PHP_VERSION.". Por favor, instale o php 5.6.4 ou superior para que o sistema funcione corretamente.</div>";
