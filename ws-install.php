@@ -80,7 +80,7 @@
 					ws_delete_dir("./../".$folderName);
 					$zip->close();
 					unlink("./../ws-update.zip");
-					echo "<script>window.top.location='/admin';</script>";
+					echo "<script>window.top.location='./../admin';</script>";
 				};
 				exit; 
 			}
@@ -99,7 +99,7 @@
 		<script>
 			window.top.$("#loader,.logo").hide();
 			window.top.$("#botao").unbind("click press tap").bind("click press tap",function(){
-				window.top.$("#iframe").attr("src","/ws-install-master/ws-install.php?install=install&githubFile=<?=$_GET['githubFile']?>");
+				window.top.$("#iframe").attr("src","./../ws-install-master/ws-install.php?install=install&githubFile=<?=$_GET['githubFile']?>");
 				window.top.$("#botao").hide();
 				window.top.$(".comboCentral").hide();
 				window.top.$(".preloader").show();
@@ -137,7 +137,7 @@
 
 
 		file_put_contents("./../ws-update.zip",file_get_contents($_GET['githubFile'], false, $ctx));
-		echo "<script>window.location='/ws-install-master/ws-install.php?install=fire&githubFile=".$_GET['githubFile']."';</script>";
+		echo "<script>window.location='./../ws-install-master/ws-install.php?install=fire&githubFile=".$_GET['githubFile']."';</script>";
 		exit;
 endif;
 
